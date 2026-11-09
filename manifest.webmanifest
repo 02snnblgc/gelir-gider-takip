@@ -1,0 +1,14 @@
+{
+  "name": "Hatırlat - Gelir Gider ve Olay Takibi",
+  "short_name": "Hatırlat",
+  "description": "Çevrimdışı kişisel gelir, gider ve hatırlatma takibi",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f7fb",
+  "theme_color": "#8c7bd9",
+  "lang": "tr",
+  "icons": [
+    { "src": "assets/app-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

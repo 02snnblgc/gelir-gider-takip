@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f7fb">
+  <meta name="description" content="Çevrimdışı kişisel gelir, gider ve hatırlatma takip uygulaması.">
+  <title>Hatırlat</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/app-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Hatırlat ana sayfa"><img src="assets/app-icon.svg" alt=""><span>Hatırlat</span></a>
+    <div class="toolbar">
+      <label class="sr-only" for="theme-mode">Görünüm</label>
+      <select id="theme-mode" aria-label="Açık veya koyu görünüm"><option value="light">Açık</option><option value="dark">Koyu</option></select>
+      <label class="sr-only" for="accent-color">Tema rengi</label>
+      <select id="accent-color" aria-label="Pastel tema rengi"><option value="lavender">Lavanta</option><option value="mint">Nane</option><option value="peach">Şeftali</option><option value="sky">Gökyüzü</option><option value="rose">Gül</option></select>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="period card" aria-label="Aylık dönem">
+      <button id="previous-month" class="icon-button" type="button" aria-label="Önceki ay">‹</button>
+      <div><p class="eyebrow">AYLIK ÖZET</p><h1 id="period-label">—</h1></div>
+      <button id="next-month" class="icon-button" type="button" aria-label="Sonraki ay">›</button>
+    </section>
+
+    <section class="summary-grid" aria-label="Gelir gider özeti">
+      <article class="summary-card income-card"><span>Toplam gelir</span><strong id="income-total">₺0,00</strong></article>
+      <article class="summary-card expense-card"><span>Toplam gider</span><strong id="expense-total">₺0,00</strong></article>
+      <article class="summary-card balance-card"><span>Bakiye</span><strong id="balance-total">₺0,00</strong></article>
+    </section>
+
+    <section class="card">
+      <div class="section-heading"><div><p class="eyebrow">DÖNEM NOTU</p><h2>Bu ay için not</h2></div><button id="save-month-note" class="button secondary" type="button">Notu kaydet</button></div>
+      <textarea id="month-note" rows="2" placeholder="Bu döneme ait notlarınız…"></textarea>
+    </section>
+
+    <section class="card">
+      <div class="section-heading"><div><p class="eyebrow">YENİ KAYIT</p><h2>Gelir veya gider ekle</h2></div></div>
+      <form id="finance-form" class="form-grid">
+        <input id="finance-id" type="hidden">
+        <label>Kayıt türü<select id="finance-type" required><option value="expense">Gider</option><option value="income">Gelir</option></select></label>
+        <label>Kategori<input id="finance-category" list="category-options" maxlength="60" placeholder="Örn. Elektrik faturası" required><datalist id="category-options"></datalist></label>
+        <label>Miktar (TL)<input id="finance-amount" type="number" min="0.01" step="0.01" inputmode="decimal" required></label>
+        <label>Tarih<input id="finance-date" type="date" required></label>
+        <label class="full-width">Tekrar<select id="finance-repeat"><option value="none">Tekrar yok</option><option value="monthly">Her ay (aynı gün)</option><option value="yearly">Her yıl</option></select></label>
+        <label class="full-width">Not<textarea id="finance-note" rows="2" maxlength="500" placeholder="İsteğe bağlı"></textarea></label>
+        <div class="form-actions full-width"><button class="button primary" type="submit">Kaydı ekle</button><button id="cancel-finance-edit" class="button secondary hidden" type="button">Düzenlemeyi iptal et</button></div>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="section-heading"><div><p class="eyebrow">HATIRLATICI</p><h2>Önemli olay ekle</h2></div><button id="enable-notifications" class="button secondary" type="button">Bildirim izni</button></div>
+      <p class="notice">Bu web sürümünde bildirim kontrolü uygulama açıkken yapılır. Uygulama kapalıyken güvenilir alarm için yerel Android sürümü gerekir.</p>
+      <form id="reminder-form" class="form-grid">
+        <input id="reminder-id" type="hidden">
+        <label class="full-width">Başlık<input id="reminder-title" maxlength="100" placeholder="Örn. Elektrik faturası son ödeme" required></label>
+        <label>Kategori<input id="reminder-category" maxlength="60" placeholder="Fatura, kişisel…"></label>
+        <label>Tarih ve saat<input id="reminder-datetime" type="datetime-local" required></label>
+        <label>Tekrar<select id="reminder-repeat"><option value="none">Tekrar yok</option><option value="weekly">Her hafta</option><option value="monthly">Her ay</option><option value="yearly">Her yıl</option></select></label>
+        <label>Erteleme<select id="reminder-snooze"><option value="5">5 dakika</option><option value="10">10 dakika</option><option value="15">15 dakika</option></select></label>
+        <label class="full-width">Hatırlatma zamanları
+          <span class="checkbox-row"><label><input type="checkbox" name="offset" value="1440" checked> 1 gün önce</label><label><input type="checkbox" name="offset" value="60" checked> 1 saat önce</label><label><input type="checkbox" name="offset" value="0" checked> Olay anında</label></span>
+        </label>
+        <label class="full-width">Görsel mesaj / not<textarea id="reminder-note" rows="2" maxlength="500" placeholder="Hatırlatma geldiğinde gösterilecek açıklama"></textarea></label>
+        <div class="form-actions full-width"><button class="button primary" type="submit">Hatırlatıcı ekle</button><button id="cancel-reminder-edit" class="button secondary hidden" type="button">Düzenlemeyi iptal et</button></div>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="section-heading list-heading"><div><p class="eyebrow">KAYITLAR</p><h2>Gelir ve giderler</h2></div><span id="record-count" class="count-badge">0</span></div>
+      <div id="finance-list" class="record-list"></div>
+    </section>
+
+    <section class="card">
+      <div class="section-heading"><div><p class="eyebrow">TAKVİM</p><h2>Hatırlatmalar</h2></div></div>
+      <div class="filter-grid">
+        <label class="full-width">Ara<input id="search-input" type="search" placeholder="Başlık veya kategori ara"></label>
+        <label>Tarih filtresi<input id="filter-date" type="date"></label>
+        <label>Durum<select id="filter-status"><option value="all">Tümü</option><option value="open">Tamamlanmadı</option><option value="done">Tamamlandı</option></select></label>
+      </div>
+      <div id="reminder-list" class="record-list"></div>
+    </section>
+
+    <section class="card">
+      <div class="section-heading"><div><p class="eyebrow">VERİLERİNİZ</p><h2>Yedekle ve dışa aktar</h2></div></div>
+      <p class="muted">Kayıtlarınız bu cihazda saklanır. Taşımak veya korumak için düzenli yedek alın.</p>
+      <div class="export-actions"><button id="backup-export" class="button secondary" type="button">JSON yedeği indir</button><label class="button secondary file-button">JSON geri yükle<input id="backup-import" type="file" accept="application/json,.json" hidden></label><button id="csv-export" class="button secondary" type="button">Bu ayı CSV indir</button></div>
+    </section>
+    <footer>Hatırlat · Verileriniz bu cihazda kalır</footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="src/js/app.js"></script>
+</body>
+</html>

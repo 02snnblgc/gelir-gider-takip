@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Hatırlat simgesi</title>
+  <rect width="128" height="128" rx="30" fill="#8c7bd9"/>
+  <path d="M64 24c-18 0-31 13-31 31v18l-9 13c-2 3 0 7 4 7h72c4 0 6-4 4-7l-9-13V55c0-18-13-31-31-31Z" fill="#fff"/>
+  <path d="M51 101c2 7 7 11 13 11s11-4 13-11" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="7"/>
+  <circle cx="94" cy="34" r="13" fill="#ffc77d"/>
+</svg>
